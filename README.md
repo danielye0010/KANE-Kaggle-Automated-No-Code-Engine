@@ -1,4 +1,4 @@
-# AutoML for a 3-Year-Old: Beat 13000+ Data Scientists with 10 Lines of Code
+# AutoML for a 3-Year-Old: Beat 13000+ Data Scientists with 10 Lines of Code in 5 minutes
 
 ## Short Description
 A no-code AutoML tool with a simple GUI—train a model in 10 minutes, beat 13,000+ Kaggle competitors with just 10 lines of code!
