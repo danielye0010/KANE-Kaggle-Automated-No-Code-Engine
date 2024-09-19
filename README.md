@@ -27,7 +27,7 @@ This tool makes machine learning **so simple** that even a 3-year-old could do i
 
 ---
 
-## Example: Beat 13,000 Data Scientists on Titanic in 10 Minutes
+## Example: Beat 13,000 Data Scientists on Titanic in 5 Minutes
 
 The **Titanic - Machine Learning from Disaster** competition on Kaggle is a classic binary classification problem. The goal is to predict whether a passenger survived or not based on various features such as their age, ticket class, gender, and more. With over 13,000 participants, it's a highly competitive challenge.
 
