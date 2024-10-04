@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AutoML for Tabular Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 600px;
+        }
+        .card {
+            margin-top: 20px;
+        }
+        .btn-primary {
+            width: 100%;
+        }
+        #loading {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">AutoML for Tabular Data</h1>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form action="{{ url_for('start_training') }}" method="post">
+                    <div class="form-group">
+                        <label for="competition_name">Competition Name:</label>
+                        <input type="text" id="competition_name" name="competition_name" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="label_column">Label Column:</label>
+                        <input type="text" id="label_column" name="label_column" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_column">ID Column (default: 'Id'):</label>
+                        <input type="text" id="id_column" name="id_column" class="form-control" placeholder="Id">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="problem_type">Problem Type:</label>
+                        <select id="problem_type" name="problem_type" class="form-control">
+                            {% for pt in problem_types %}
+                            <option value="{{ pt }}">{{ pt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eval_metric">Evaluation Metric:</label>
+                        <select id="eval_metric" name="eval_metric" class="form-control">
+                            {% for em in eval_metrics %}
+                            <option value="{{ em }}">{{ em }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preset">Preset:</label>
+                        <select id="preset" name="preset" class="form-control">
+                            {% for p in presets %}
+                            <option value="{{ p }}">{{ p }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time_limit">Time Limit:</label>
+                        <select id="time_limit" name="time_limit" class="form-control">
+                            {% for tl in time_limit_options %}
+                            <option value="{{ tl }}">{{ tl }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">Start Training</button>
+                </form>
+                <div id="loading" class="text-center mt-3">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p>Training in progress, please wait...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Generate EDA Report</h5>
+                <form id="eda-form" action="{{ url_for('generate_eda_report') }}" method="post">
+                    <div class="form-group">
+                        <label for="competition_name_eda">Competition Name:</label>
+                        <input type="text" id="competition_name_eda" name="competition_name" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Generate EDA Report</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 表单验证功能
+            const form = document.querySelector('form');
+            const competitionNameInput = document.getElementById('competition_name');
+            const labelColumnInput = document.getElementById('label_column');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const loadingDiv = document.getElementById('loading');
+
+            // 实时检查输入
+            form.addEventListener('input', function() {
+                if (competitionNameInput.value.trim() === '' || labelColumnInput.value.trim() === '') {
+                    submitButton.disabled = true;
+                    submitButton.classList.add('btn-secondary');
+                    submitButton.classList.remove('btn-primary');
+                } else {
+                    submitButton.disabled = false;
+                    submitButton.classList.add('btn-primary');
+                    submitButton.classList.remove('btn-secondary');
+                }
+            });
+
+            // 在提交时禁用按钮和显示加载动画
+            form.addEventListener('submit', function() {
+                // 显示加载动画
+                loadingDiv.style.display = 'block';
+                // 禁用按钮，防止重复提交
+                submitButton.disabled = true;
+                submitButton.innerText = 'Training in Progress...';
+            });
+
+            // EDA 确认弹窗
+            const edaForm = document.querySelector('#eda-form');
+            edaForm.addEventListener('submit', function(event) {
+                const confirmed = confirm("Generating an EDA report may take some time. Are you sure you want to proceed?");
+                if (!confirmed) {
+                    event.preventDefault(); // 取消提交
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
