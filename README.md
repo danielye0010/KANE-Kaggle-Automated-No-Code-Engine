@@ -1,46 +1,66 @@
-# AutoML GUI
+# AutoML solution with GUI -  KANE: Kaggle AutoML No-Code Engine
 
 ## Short Description
-A no-code AutoML tool with a simple GUI—train a model in 10 minutes, beat 13,000+ Kaggle competitors with just 10 lines of code!
+
+KANE (Kaggle AutoML No-Code Engine) is a web-based application designed to simplify and automate participation in Kaggle competitions. Built on top of the AutoGluon framework, KANE offers an intuitive, no-code interface to configure, execute, and optimize machine learning workflows with minimal effort. Its features include parameter configuration, automated backend processes, advanced training strategies, and real-time monitoring.
 
 ---
 
-## Overview
+## Features
 
-This tool makes machine learning **so simple** that even a 3-year-old could do it! With a beginner-friendly interface, you can train powerful models on Kaggle competitions like Titanic without writing any code. Just input a few details, and the tool will download data, train the model, and generate a ready-to-submit file.
-
----
-
-## Key Features
-
- **No Coding Needed**: Simply use the GUI to select options—AutoGluon handles the rest.
-- **Fast & Powerful**: Train models in as little as 5 minutes and get results that can compete with thousands of data scientists.
-- **Real-Time Feedback**: Progress bar keeps you updated as your model trains.
-- **Auto Submission File**: Automatically generates a `submission.csv` file ready for Kaggle.
-- **Multiple Evaluation Metrics**: Choose from metrics like accuracy, AUC, F1, RMSE, and more to match your competition’s requirements.
-- **Automatic Dataset Handling**: Automatically downloads and unzips Kaggle datasets—no manual steps required.
-- **Preset Flexibility**: Easily choose between `good_quality` for fast training or `best_quality` for maximum performance.
-- **Dynamic Problem Type Detection**: The tool automatically detects whether your problem is binary classification, multiclass classification, or regression—no need to manually configure.
-- **Time Limit Options**: Set time limits from 5 minutes to 10 hours for optimal training duration based on your resources and needs.
-- **User-Friendly Customization**: Input fields for competition name, label column, and ID column make it easy to adapt to any Kaggle competition.
-- **Versatile Problem Solving**: Whether you’re tackling a simple binary classification like Titanic or a complex regression task, this tool adapts to various types of machine learning challenges.
+### 1. Intuitive Parameter Configuration via Dropdown Menus
+KANE provides a user-friendly interface for configuring machine learning tasks without any coding. Users can customize the following options:
+- **Competition Name**: Specify the Kaggle competition to automatically download and prepare datasets.
+- **Label Column**: Define the target variable for prediction.
+- **Problem Type**: Choose between regression, binary classification, or multiclass classification—or let KANE auto-detect the problem type.
+- **Evaluation Metric**: Select metrics like accuracy or RMSE to guide optimization.
+- **Time Limit**: Set predefined training durations (e.g., 5 minutes, 1 hour) to balance performance and resource usage.
+- **Training Presets**: Adjust model depth and computational intensity with presets like `'best_quality'`, `'good_quality'`, or `'medium_quality'`.
 
 ---
 
-## Example: Beat 13,000 Data Scientists on Titanic in 5 Minutes
+### 2. Automated Backend Processes
+KANE automates critical backend workflows to ensure seamless execution:
+- **Automated Data Acquisition**: Downloads and prepares competition data based on user inputs, handling extraction and organization.
+- **No-Code Model Training**: Initiates model training with AutoGluon managing preprocessing, model selection, and optimization.
+- **Submission File Generation**: Automatically formats and creates Kaggle-compatible submission files.
+- **Exploratory Data Analysis (EDA)**: Generates detailed reports using the Sweetviz framework, offering visualizations and statistical insights.
+- **Progress Monitoring and Error Handling**: Includes a real-time progress bar and mechanisms to detect and report errors, providing actionable feedback.
 
-The **Titanic - Machine Learning from Disaster** competition on Kaggle is a classic binary classification problem. The goal is to predict whether a passenger survived or not based on various features such as their age, ticket class, gender, and more. With over 13,000 participants, it's a highly competitive challenge.
+---
 
-Using this tool, you can train a machine learning model on the Titanic dataset in just **10 minutes** and achieve a **top 4% ranking**, beating thousands of data scientists—all with just 10 lines of code and no prior machine learning experience.
+### 3. Advanced Training Strategies
+KANE leverages AutoGluon’s state-of-the-art training strategies to optimize model performance:
+- **Data Preprocessing**: Handles diverse data types (numerical, categorical, text, date/time) with model-agnostic transformations.
+- **Multi-Model Ensembling**: Combines models like boosted trees, neural networks, and random forests using multi-layer stacking for robust predictions.
+- **Repeated k-Fold Bagging**: Trains multiple versions of models on different data partitions, reducing overfitting and ensuring stability.
+- **Hyperparameter Optimization**: Uses Ray Tune to explore hyperparameter spaces with efficient strategies like random search and Bayesian optimization.
+- **Resource and Time Management**: Allocates training time adaptively, prioritizing models with the highest potential impact on accuracy.
 
-Here’s the code to get started:
+---
 
-```python
-run_kaggle_automl(
-    competition_name='titanic',
-    label_column='Survived',
-    id_column='PassengerId',
-    time_limit=600,  # 10 minutes
-    presets='best_quality'
-)
+### 4. Real-Time Monitoring and Feedback
+KANE offers transparency and reliability through:
+- **Real-Time Progress Tracking**: A progress bar displays the status of tasks such as data preparation, training, and submission generation.
+- **Error Detection and Reporting**: Alerts users to issues, ensuring quick resolution and uninterrupted workflows.
 
+---
+
+## Getting Started
+
+Follow the steps below to set up and launch KANE on your local machine.
+
+### Clone the Repository
+Clone the KANE repository from GitHub to your local machine:
+```bash
+git clone https://github.com/danielye0010/KANE-Kaggle-Automated-No-Code-Engine.git
+```
+### Launch the Application
+```bash
+pip install -r requirements.txt
+python app.py
+```
+
+
+## MIT License
+KANE is licensed under the MIT License, allowing free use, modification, and distribution with attribution. The software is provided "as is," without warranty of any kind. For full details, see the LICENSE file.
