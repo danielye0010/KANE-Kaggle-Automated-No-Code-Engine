@@ -48,19 +48,18 @@ KANE offers transparency and reliability through:
 
 ## Getting Started
 
-Follow the steps below to set up and launch KANE on your local machine.
+Follow the steps below to set up and launch KANE on your local machine. For installing AutoGluon and setting up kaggle api, please refer to the official documentation.
 
 ### Clone the Repository
 Clone the KANE repository from GitHub to your local machine:
 ```bash
 git clone https://github.com/danielye0010/KANE-Kaggle-Automated-No-Code-Engine.git
 ```
-### Launch the Application
+### Dependencies and Launchment
 ```bash
 pip install -r requirements.txt
 python app.py
 ```
-
 
 ## MIT License
 KANE is licensed under the MIT License, allowing free use, modification, and distribution with attribution. The software is provided "as is," without warranty of any kind. For full details, see the LICENSE file.
